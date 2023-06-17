@@ -21,7 +21,7 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Build project
-        run: ${{vars.VITE_PUBLIC_KEY}} ${{vars.VITE_SERVICE_ID}} ${{vars.VITE_TEMPLATE_ID}} npm run build
+        run: ${{secrets.VITE_PUBLIC_KEY}} ${{secrets.VITE_SERVICE_ID}} ${{secrets.VITE_TEMPLATE_ID}} npm run build
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
