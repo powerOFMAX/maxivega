@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom"
 import {
   About,
   Contact,
@@ -10,7 +10,7 @@ import {
   Works,
   StarsCanvas,
   Footer,
-} from "./components";
+} from "./components"
 
 const App = () => {
   return (
@@ -32,7 +32,7 @@ const App = () => {
         <Footer />
       </div>
     </BrowserRouter>
-  );
-};
+  )
+}
 
-export default App;
+export default App

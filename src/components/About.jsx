@@ -1,17 +1,17 @@
-import { Tilt } from "react-tilt";
-import { motion } from "framer-motion";
-import { styles } from "../styles";
-import { services } from "../constants";
-import { fadeIn, textVariant } from "../utils/motion";
-import { SectionWrapper } from "../hoc/SectionWrapper";
+import { Tilt } from "react-tilt"
+import { motion } from "framer-motion"
+import { styles } from "../styles"
+import { services } from "../constants"
+import { fadeIn, textVariant } from "../utils/motion"
+import { SectionWrapper } from "../hoc/SectionWrapper"
 
 function calculateExperienceYears(startDate) {
-  const currentDate = new Date();
-  const startYear = startDate.getFullYear();
-  const currentYear = currentDate.getFullYear();
-  const experienceYears = currentYear - startYear;
+  const currentDate = new Date()
+  const startYear = startDate.getFullYear()
+  const currentYear = currentDate.getFullYear()
+  const experienceYears = currentYear - startYear
 
-  return experienceYears;
+  return experienceYears
 }
 
 const ServiceCard = ({ index, title, icon }) => {
@@ -30,18 +30,16 @@ const ServiceCard = ({ index, title, icon }) => {
           className="bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col"
         >
           <img src={icon} alt={title} className="w-16 h-16 object-contain" />
-          <h3 className="text-white text-[20px] font-bold text-center">
-            {title}
-          </h3>
+          <h3 className="text-white text-[20px] font-bold text-center">{title}</h3>
         </div>
       </motion.div>
     </Tilt>
-  );
-};
+  )
+}
 
 const About = () => {
-  const startDate = new Date("2018-01-01");
-  const experienceYears = calculateExperienceYears(startDate);
+  const startDate = new Date("2018-01-01")
+  const experienceYears = calculateExperienceYears(startDate)
 
   return (
     <>
@@ -54,11 +52,11 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
       >
-        I am a dedicated and passionate software engineer with a strong
-        foundation in developing high-quality applications and solutions. With{" "}
-        {experienceYears} years of experience in the industry, I have honed my
-        skills in various technologies and frameworks, enabling me to deliver
-        efficient and scalable software solutions.
+        I am a dedicated and passionate software engineer with a strong foundation in
+        developing high-quality applications and solutions. With {experienceYears}{" "}
+        years of experience in the industry, I have honed my skills in various
+        technologies and frameworks, enabling me to deliver efficient and scalable
+        software solutions.
       </motion.p>
 
       <div className="mt-20 flex flex-wrap gap-10 justify-center">
@@ -67,7 +65,7 @@ const About = () => {
         ))}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default SectionWrapper(About, "about");
+export default SectionWrapper(About, "about")

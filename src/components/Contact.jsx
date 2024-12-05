@@ -1,33 +1,33 @@
-import { useState, useRef } from "react";
-import emailjs from "@emailjs/browser";
+import { useState, useRef } from "react"
+import emailjs from "@emailjs/browser"
 
-import { motion } from "framer-motion";
-import { EarthCanvas } from "./canvas";
-import { SectionWrapper } from "../hoc";
+import { motion } from "framer-motion"
+import { EarthCanvas } from "./canvas"
+import { SectionWrapper } from "../hoc"
 
-import { slideIn } from "../utils/motion";
-import { styles } from "../styles";
-import { PUBLIC_KEY, SERVICE_ID, TEMPLATE_ID } from "../constants";
+import { slideIn } from "../utils/motion"
+import { styles } from "../styles"
+import { PUBLIC_KEY, SERVICE_ID, TEMPLATE_ID } from "../constants"
 
 const Contact = () => {
-  const formRef = useRef();
+  const formRef = useRef()
 
   const [form, setForm] = useState({
     name: "",
     email: "",
     message: "",
-  });
+  })
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
+    const { name, value } = e.target
+    setForm({ ...form, [name]: value })
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault()
+    setLoading(true)
     emailjs
       .send(
         SERVICE_ID,
@@ -36,26 +36,26 @@ const Contact = () => {
           from_name: form.name,
           to_name: "Maximiliano",
           from_email: form.email,
-          to_email: "codesquare.llc@outlook.com",
+          to_email: "info@thecodesquare.com",
           message: form.message,
         },
         PUBLIC_KEY
       )
       .then(() => {
-        setLoading(false);
-        alert("Thank you, I'll get back to you as soon as possible");
+        setLoading(false)
+        alert("Thank you, I'll get back to you as soon as possible")
         setForm({
           name: "",
           email: "",
           message: "",
-        });
+        })
       }),
       (error) => {
-        setLoading(false);
-        console.log(error);
-        alert("Something went wrong");
-      };
-  };
+        setLoading(false)
+        console.log(error)
+        alert("Something went wrong")
+      }
+  }
 
   return (
     <div className="xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden">
@@ -125,7 +125,7 @@ const Contact = () => {
         <EarthCanvas />
       </motion.div>
     </div>
-  );
-};
+  )
+}
 
-export default SectionWrapper(Contact, "contact");
+export default SectionWrapper(Contact, "contact")

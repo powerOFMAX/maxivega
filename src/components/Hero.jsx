@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
-import { styles } from "../styles";
-import { ComputersCanvas } from "./canvas";
+import { motion } from "framer-motion"
+import { styles } from "../styles"
+import { ComputersCanvas } from "./canvas"
 
 const Hero = () => {
   return (
@@ -17,8 +17,8 @@ const Hero = () => {
             Hi, I&apos;m <span className="text-[#915eff]">Maximiliano</span>
           </h1>
           <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-            I help companies & individuals <br className="sm:block hidden" /> to
-            turn their ideas into great software.
+            I help companies & individuals <br className="sm:block hidden" /> to turn
+            their ideas into great software.
           </p>
         </div>
       </div>
@@ -42,7 +42,7 @@ const Hero = () => {
         </a>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero
