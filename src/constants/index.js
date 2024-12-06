@@ -30,8 +30,10 @@ import {
   mobileAppIcon,
   backendIcon,
   agileIcon,
+  aiIcon,
   architectIcon,
-} from "../assets";
+  gbru,
+} from "../assets"
 
 export const navLinks = [
   {
@@ -46,12 +48,16 @@ export const navLinks = [
     id: "contact",
     title: "Contact",
   },
-];
+]
 
 const services = [
   {
     title: "Software Architect",
     icon: architectIcon,
+  },
+  {
+    title: "AI Automation & Prompt Engineering",
+    icon: aiIcon,
   },
   {
     title: "Custom Software Development",
@@ -73,7 +79,7 @@ const services = [
     title: "Code Review and Technical Consulting",
     icon: agileIcon,
   },
-];
+]
 
 const technologies = [
   {
@@ -128,7 +134,7 @@ const technologies = [
     name: "Python",
     icon: python,
   },
-];
+]
 
 const experiences = [
   {
@@ -187,13 +193,13 @@ const experiences = [
     iconBg: "#E6DEDD",
     date: "Mar 2021 - Present",
     points: [
-      "Software Engineer at Indeed, responsible for improving the codebase, addressing A11y issues, and creating new features.",
+      "Lead Software Engineer at Indeed, responsible for improving the codebase, addressing A11y issues, and creating new features.",
       "Managed two globally distributed teams: one with 12 developers and another with three developers across Japan, Europe, the US, and Latin America.",
       "Led important initiatives that resulted in notorious ROI for the client.",
       "Participating in code reviews and providing constructive feedback to other developers.",
     ],
   },
-];
+]
 
 const testimonials = [
   {
@@ -202,10 +208,9 @@ const testimonials = [
     name: "Gabriel Brunacci",
     designation: "CEO & Founder",
     company: "Brave New Technology",
-    image:
-      "https://media.licdn.com/dms/image/C5603AQF_kq21t44r9w/profile-displayphoto-shrink_100_100/0/1517795670730?e=1692230400&v=beta&t=zpuU-SIQsc5Ut3FWRyrFbrvi3yBk2Stgms0uxk9-vQ4",
+    image: gbru,
   },
-];
+]
 
 const projects = [
   {
@@ -345,11 +350,11 @@ const projects = [
     image: petgallery,
     source_code_link: "https://github.com/powerOFMAX/pet-gallery",
   },
-];
+]
 
-const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
-const SERVICE_ID = import.meta.env.VITE_SERVICE_ID;
-const TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_ID;
+const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY
+const SERVICE_ID = import.meta.env.VITE_SERVICE_ID
+const TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_ID
 
 export {
   services,
@@ -360,4 +365,4 @@ export {
   PUBLIC_KEY,
   SERVICE_ID,
   TEMPLATE_ID,
-};
+}
