@@ -5,7 +5,6 @@ import CanvasLoader from "../Loader"
 
 const Computers = ({ isMobile }) => {
   const computer = useGLTF("./scene.gltf")
-  // const computer = useGLTF("./escenarioPagina1.gltf");
 
   return (
     <mesh>

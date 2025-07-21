@@ -191,12 +191,22 @@ const experiences = [
     company_name: "AgileEngine",
     icon: ae,
     iconBg: "#E6DEDD",
-    date: "Mar 2021 - Present",
+    date: "Mar 2021 - Dec 2023",
     points: [
       "Lead Software Engineer at Indeed, responsible for improving the codebase, addressing A11y issues, and creating new features.",
       "Managed two globally distributed teams: one with 12 developers and another with three developers across Japan, Europe, the US, and Latin America.",
       "Led important initiatives that resulted in notorious ROI for the client.",
       "Participating in code reviews and providing constructive feedback to other developers.",
+    ],
+  },
+  {
+    title: "Engineer Manager & Lead Software Engineer",
+    company_name: "AgileEngine",
+    icon: ae,
+    iconBg: "#E6DEDD",
+    date: "Jan 2024 - Present",
+    points: [
+      "Solutions Consultant working with prospective clients to identify needs and propose tailored solutions",
     ],
   },
 ]

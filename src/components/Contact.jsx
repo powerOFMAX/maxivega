@@ -15,16 +15,12 @@ const EarthCanvas = lazy(() =>
 
 const Contact = () => {
   const formRef = useRef()
-  
-  const sendWhatsAppMessage = ({
-    from_name,
-    from_email,
-    message,
-  }) => {
+
+  const sendWhatsAppMessage = ({ from_name, from_email, message }) => {
     const VITE_WHATSAPP_TOKEN = import.meta.env.VITE_WHATSAPP_TOKEN
     const VITE_PHONE_NUMBER = import.meta.env.VITE_PHONE_NUMBER
     const VITE_RECIPIENT_PHONE = import.meta.env.VITE_RECIPIENT_PHONE
-    
+
     fetch(`https://graph.facebook.com/v21.0/${VITE_PHONE_NUMBER}/messages`, {
       method: "POST",
       headers: {
