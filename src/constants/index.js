@@ -40,10 +40,10 @@ export const navLinks = [
     id: "about",
     title: "About",
   },
-  {
-    id: "work",
-    title: "Work",
-  },
+  // {
+  //   id: "work",
+  //   title: "Work",
+  // },
   {
     id: "contact",
     title: "Contact",
@@ -362,17 +362,4 @@ const projects = [
   },
 ]
 
-const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY
-const SERVICE_ID = import.meta.env.VITE_SERVICE_ID
-const TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_ID
-
-export {
-  services,
-  technologies,
-  experiences,
-  testimonials,
-  projects,
-  PUBLIC_KEY,
-  SERVICE_ID,
-  TEMPLATE_ID,
-}
+export { services, technologies, experiences, testimonials, projects }

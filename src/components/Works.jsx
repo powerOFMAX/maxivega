@@ -75,11 +75,11 @@ const Works = () => {
           variants={fadeIn("", "", 0.1, 1)}
           className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
         >
-          Below, you&apos;ll find a selection of projects that highlight my skills
-          and expertise as a software engineer. Each project represents a unique
-          challenge and showcases my ability to design, develop, and deliver
-          high-quality solutions through different technologies. Click on the icons
-          to explore the projects further on GitHub.
+          Below, you&apos;ll find a selection of projects that highlight my
+          skills and expertise as a software engineer. Each project represents a
+          unique challenge and showcases my ability to design, develop, and
+          deliver high-quality solutions through different technologies. Click
+          on the icons to explore the projects further on GitHub.
         </motion.p>
       </div>
 

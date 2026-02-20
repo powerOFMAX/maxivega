@@ -1,5 +1,4 @@
-import { useState, useRef, Suspense, lazy, useEffect } from "react"
-import emailjs from "@emailjs/browser"
+import { useState, Suspense, lazy, useEffect } from "react"
 
 import { motion } from "framer-motion"
 
@@ -7,90 +6,100 @@ import { SectionWrapper } from "../hoc"
 
 import { slideIn } from "../utils/motion"
 import { styles } from "../styles"
-import { PUBLIC_KEY, SERVICE_ID, TEMPLATE_ID } from "../constants"
 
 const EarthCanvas = lazy(() =>
-  import("./canvas").then((module) => ({ default: module.EarthCanvas }))
+  import("./canvas").then((module) => ({ default: module.EarthCanvas })),
 )
 
 const Contact = () => {
-  const formRef = useRef()
-
-  const sendWhatsAppMessage = ({ from_name, from_email, message }) => {
-    const VITE_WHATSAPP_TOKEN = import.meta.env.VITE_WHATSAPP_TOKEN
-    const VITE_PHONE_NUMBER = import.meta.env.VITE_PHONE_NUMBER
-    const VITE_RECIPIENT_PHONE = import.meta.env.VITE_RECIPIENT_PHONE
-
-    fetch(`https://graph.facebook.com/v21.0/${VITE_PHONE_NUMBER}/messages`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${VITE_WHATSAPP_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        messaging_product: "whatsapp",
-        to: VITE_RECIPIENT_PHONE,
-        recipient_type: "individual",
-        type: "text",
-        text: {
-          preview_url: false,
-          body: `Error: Alguien intentó contactarte, pero ocurrió un problema.\nMensaje de: ${from_name},\nEmail: ${from_email},\nMensaje: ${message}
-          `,
-        },
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log("Notification sent:", data))
-      .catch((error) => console.error("Error sending notification:", error))
-  }
-
   const [form, setForm] = useState({
     name: "",
     email: "",
+    subject: "",
     message: "",
   })
 
   const [loading, setLoading] = useState(false)
+  const [status, setStatus] = useState({ type: "", message: "" })
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
+    if (status.message) {
+      setStatus({ type: "", message: "" })
+    }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    const name = form.name.trim()
+    const email = form.email.trim()
+    const subject = form.subject.trim()
+    const message = form.message.trim()
+
+    if (!name || !email || !subject || !message) {
+      setStatus({
+        type: "error",
+        message: "Please complete name, email, subject and message.",
+      })
+      return
+    }
+
+    if (!emailRegex.test(email)) {
+      setStatus({
+        type: "error",
+        message: "Please provide a valid email address.",
+      })
+      return
+    }
+
     setLoading(true)
-    emailjs
-      .send(
-        SERVICE_ID,
-        TEMPLATE_ID,
-        {
-          from_name: form.name,
-          to_name: "Maximiliano",
-          from_email: form.email,
-          to_email: "info@thecodesquare.com",
-          message: form.message,
+    setStatus({ type: "", message: "" })
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        PUBLIC_KEY
-      )
-      .then(() => {
-        setLoading(false)
-        alert("Thank you, I'll get back to you as soon as possible")
-        setForm({
-          name: "",
-          email: "",
-          message: "",
+        body: JSON.stringify({
+          name,
+          email,
+          subject,
+          message,
+        }),
+      })
+
+      const payload = await response.json()
+      if (!response.ok) {
+        setStatus({
+          type: "error",
+          message:
+            payload.message || "Could not send your message. Please try again.",
         })
-      }),
-      (error) => {
-        setLoading(false)
-        console.log(error, "The message will be sent through WhatsApp")
-        sendWhatsAppMessage({
-          from_name: form.name,
-          from_email: form.email,
-          message: form.message,
-        })
+        return
       }
+
+      setStatus({
+        type: "success",
+        message: payload.message || "Thanks! Your message has been sent.",
+      })
+      setForm({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      })
+    } catch (error) {
+      console.error("Contact request failed", error)
+      setStatus({
+        type: "error",
+        message: "Network error. Please try again in a moment.",
+      })
+    } finally {
+      setLoading(false)
+    }
   }
 
   const [isComponentVisible, setIsComponentVisible] = useState(false)
@@ -107,7 +116,7 @@ const Contact = () => {
           }
         })
       },
-      { threshold: 0.1 } // Trigger when 10% of the element is visible
+      { threshold: 0.1 }, // Trigger when 10% of the element is visible
     )
 
     if (targetElement) {
@@ -129,11 +138,7 @@ const Contact = () => {
         <p className={styles.sectionSubText}>Get in touch</p>
         <h3 className={styles.sectionHeadText}>Contact.</h3>
 
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          className="mt-12 flex flex-col gap-8"
-        >
+        <form onSubmit={handleSubmit} className="mt-12 flex flex-col gap-8">
           <label className="flex flex-col">
             <span className="text-white font-medium mb-4">Your Name</span>
             <input
@@ -159,6 +164,18 @@ const Contact = () => {
           </label>
 
           <label className="flex flex-col">
+            <span className="text-white font-medium mb-4">Subject</span>
+            <input
+              type="text"
+              name="subject"
+              value={form.subject}
+              onChange={handleChange}
+              placeholder="what is this about?"
+              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outlined-none border-none font-medium"
+            />
+          </label>
+
+          <label className="flex flex-col">
             <span className="text-white font-medium mb-4">Your Message</span>
             <textarea
               rows={7}
@@ -170,11 +187,22 @@ const Contact = () => {
             />
           </label>
 
+          {status.message && (
+            <p
+              className={`text-sm ${
+                status.type === "error" ? "text-red-400" : "text-green-400"
+              }`}
+            >
+              {status.message}
+            </p>
+          )}
+
           <button
             type="submit"
+            disabled={loading}
             className="bg-tertiary 
               py-3 px-8 outline-none w-fit text-white 
-              font-bold shadow-md shadow-primary rounded-xl"
+              font-bold shadow-md shadow-primary rounded-xl disabled:opacity-60"
           >
             {loading ? "Sending..." : "Send"}
           </button>

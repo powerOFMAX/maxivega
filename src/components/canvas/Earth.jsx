@@ -5,9 +5,11 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei"
 import CanvasLoader from "../Loader"
 
 const Earth = () => {
-  const earth = useGLTF("/maxivega/planet/earth.glb")
+  const earth = useGLTF(`${import.meta.env.BASE_URL}planet/earth.glb`)
 
-  return <primitive object={earth.scene} scale={1.8} position-y={0} rotation-y={0} />
+  return (
+    <primitive object={earth.scene} scale={1.8} position-y={0} rotation-y={0} />
+  )
 }
 const EarthCanvas = () => {
   return (
@@ -27,7 +29,7 @@ const EarthCanvas = () => {
           autoRotate
           enableZoom={false}
           minPolarAngle={Math.PI / 2}
-          mixPolarAngle={Math.PI / 2}
+          maxPolarAngle={Math.PI / 2}
         />
         <Earth />
         <ambientLight intensity={2} />

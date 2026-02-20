@@ -1,32 +1,42 @@
-## How to run
+## Setup
 ```bash
-npm i
+npm install
+cp .env.example .env
+```
+
+Configure these environment variables in `.env`:
+```bash
+RESEND_API_KEY=
+CONTACT_TO_EMAIL=
+CONTACT_FROM_EMAIL=
+```
+
+## Local development
+Frontend only:
+```bash
 npm run dev
 ```
 
-
-### Linter & Prettier
+Frontend + Vercel function (`/api/contact`):
 ```bash
-npm run lint:fix
+npx vercel dev
+```
+
+## Lint and format
+```bash
+npm run lint
 npm run format
 ```
-## Building
 
-### It's using emailjs for the form
-```bash
-VITE_PUBLIC_KEY=
-VITE_SERVICE_ID=
-VITE_TEMPLATE_ID=
-```
-
-and Whatsapp for the errors
-```bash
-VITE_WHATSAPP_TOKEN=
-VITE_PHONE_NUMBER=
-VITE_RECIPIENT_PHONE=
-```
-
-### It will deploy in github Pages
+## Build
 ```bash
 npm run build
 ```
+
+## Vercel deployment
+Set the same env vars in Vercel project settings:
+- `RESEND_API_KEY`
+- `CONTACT_TO_EMAIL`
+- `CONTACT_FROM_EMAIL`
+
+The contact form posts to `/api/contact` and Vercel serves `api/contact.js` as a Serverless Function.

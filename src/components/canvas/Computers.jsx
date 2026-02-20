@@ -4,7 +4,7 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei"
 import CanvasLoader from "../Loader"
 
 const Computers = ({ isMobile }) => {
-  const computer = useGLTF("/maxivega/scene.gltf");
+  const computer = useGLTF(`${import.meta.env.BASE_URL}scene.gltf`)
 
   return (
     <mesh>
